@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import chatRoutes from './routes/chat.routes.js';
 import compatibilityRoutes from './routes/compatibility.routes.js';
+import horoscopeRoutes from './routes/horoscope.routes.js';
 
 dotenv.config();
 
@@ -13,8 +14,10 @@ const port = process.env.PORT || 3005;
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use('/api', chatRoutes);
 app.use('/api', compatibilityRoutes);
+app.use('/api', horoscopeRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -28,7 +31,8 @@ app.get('/api/health', (req, res) => {
       deprecationDate: null,
       endpoints: {
         chat: '/api/chat',
-        compatibility: '/api/compatibility-reading'
+        compatibility: '/api/compatibility-reading',
+        horoscope: '/api/daily-horoscope'
       }
     }
   });
