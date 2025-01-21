@@ -63,4 +63,25 @@ router.post('/logout', async (req, res) => {
   }
 });
 
+// Google Sign-In callback handler
+router.get('/callback/google', async (req, res) => {
+  try {
+    const { code } = req.query;
+    if (!code) {
+      throw new Error('No code provided');
+    }
+
+    const { data, error } = await supabase.auth.exchangeCodeForSession(String(code));
+    if (error) throw error;
+
+    res.json({
+      user: data.user,
+      session: data.session,
+    });
+  } catch (error: any) {
+    console.error('Google callback error:', error);
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export default router; 
