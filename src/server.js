@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import chatRoutes from './routes/chat.routes.js';
 import compatibilityRoutes from './routes/compatibility.routes.js';
 import horoscopeRoutes from './routes/horoscope.routes.js';
+import palmReadingRoutes from './routes/palmReading.routes.js';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api', chatRoutes);
 app.use('/api', compatibilityRoutes);
 app.use('/api', horoscopeRoutes);
+app.use('/api', palmReadingRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -32,7 +34,8 @@ app.get('/api/health', (req, res) => {
       endpoints: {
         chat: '/api/chat',
         compatibility: '/api/compatibility-reading',
-        horoscope: '/api/daily-horoscope'
+        horoscope: '/api/daily-horoscope',
+        palmReading: '/api/palm-reading'
       }
     }
   });
